@@ -161,7 +161,7 @@
             @encode(void)[0],
             @encode(NSManagedObject *)[0],
             @encode(SEL)[0],
-            @encode(NSUInteger)[0],
+            @encode(NSIndexSet *)[0],
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
