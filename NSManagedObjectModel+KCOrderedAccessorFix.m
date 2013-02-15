@@ -36,7 +36,7 @@
     
     NSString *relationshipName = [relationship name];
     
-    NSString *capitalizedName = [relationshipName capitalizedString];
+    NSString *capitalizedName = [relationshipName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[relationshipName substringToIndex:1] uppercaseString]];
     
     const char *fastPrimitiveName = [[[NSString alloc] initWithFormat:@"primitive%@", capitalizedName] UTF8String];
     
