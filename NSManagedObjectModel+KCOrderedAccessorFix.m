@@ -270,9 +270,9 @@
                 return;
             
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
-            [_s willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexSet forKey:relationshipName];
+            [_s willChange:NSKeyValueChangeRemoval valuesAtIndexes:indexSet forKey:relationshipName];
             [primitive removeObjectAtIndex:idx];
-            [_s didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexSet forKey:relationshipName];
+            [_s didChange:NSKeyValueChangeRemoval valuesAtIndexes:indexSet forKey:relationshipName];
         });
         const char *encoding = (const char []){
             @encode(void)[0],
