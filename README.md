@@ -34,3 +34,5 @@ The fix generates the following methods on its entities's classes for each order
 More fine-grained applications of these KVC methods are available through `kc_generateOrderedSetAccessorsForEntity:` and `kc_generateOrderedSetAccessorsForRelationship:`.
 
 Calling the generated methods does not result in setting the underlying property with a new ordered set, as done by some other fixes for this issue. Instead, each method produces the appropriate KVO notifications for an [ordered to-many relationship](http://developer.apple.com/library/mac/documentation/cocoa/conceptual/KeyValueObserving/Articles/KVOCompliance.html#//apple_ref/doc/uid/20002178-SW3) and uses the efficient [dynamically-generated primitive accessors](https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/CoreDataFramework/Classes/NSManagedObject_Class/Reference/NSManagedObject.html#//apple_ref/occ/instm/NSManagedObject/primitiveValueForKey:).
+
+This category uses ARC. For use in a manual reference counting project, add the `-fobjc-arc` flag to "Compiler Flags" in Build Phases --> Compile Sources for `NSManagedObjectModel+KCOrderedAccessorFix.m`.
