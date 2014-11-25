@@ -107,7 +107,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"insertObject:in%@AtIndex:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSManagedObject *value, NSUInteger idx) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
@@ -130,7 +130,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"removeObjectFrom%@AtIndex:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSUInteger idx) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
@@ -152,7 +152,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"insert%@:atIndexes:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSArray *objects, NSIndexSet *indexes) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             [_s willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexes forKey:relationshipName];
@@ -174,7 +174,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"remove%@AtIndexes:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSIndexSet *indexes) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             [_s willChange:NSKeyValueChangeRemoval valuesAtIndexes:indexes forKey:relationshipName];
@@ -195,7 +195,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"replaceObjectIn%@AtIndex:withObject:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSUInteger idx, NSManagedObject *obj) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
@@ -218,7 +218,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"replace%@AtIndexes:with%@:", capitalizedName, capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSIndexSet *indexes, NSArray *objects) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             [_s willChange:NSKeyValueChangeReplacement valuesAtIndexes:indexes forKey:relationshipName];
@@ -240,7 +240,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"add%@Object:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSManagedObject *obj) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:[primitive count]];
@@ -262,7 +262,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"remove%@Object:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSManagedObject *obj) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             const NSUInteger idx = [primitive indexOfObject:obj];
@@ -288,7 +288,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"add%@:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSOrderedSet *objects) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             NSArray *newObjects = [objects objectsAtIndexes:[objects indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -323,7 +323,7 @@
         SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"remove%@:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSOrderedSet *objects) {
             [_s willAccessValueForKey:relationshipName];
-            NSMutableOrderedSet *primitive = objc_msgSend(_s, fastPrimitiveGetter);
+            NSMutableOrderedSet *primitive = ((id (*)(id, SEL))objc_msgSend)(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
             NSMutableIndexSet *removalIndexes = [NSMutableIndexSet new];
