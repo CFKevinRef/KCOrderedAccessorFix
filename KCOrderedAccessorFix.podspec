@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "KCOrderedAccessorFix"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "Fixes \"CoreDataGeneratedAccessors\" for ordered, to-many relationships."
 
   s.description      = <<-DESC
