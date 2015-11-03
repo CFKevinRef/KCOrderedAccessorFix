@@ -122,6 +122,7 @@
             @encode(SEL)[0],
             @encode(NSManagedObject *)[0],
             @encode(NSUInteger)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -144,6 +145,7 @@
             @encode(NSManagedObject *)[0],
             @encode(SEL)[0],
             @encode(NSUInteger)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -166,6 +168,7 @@
             @encode(SEL)[0],
             @encode(NSArray *)[0],
             @encode(NSIndexSet *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -187,6 +190,7 @@
             @encode(NSManagedObject *)[0],
             @encode(SEL)[0],
             @encode(NSIndexSet *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -210,6 +214,7 @@
             @encode(SEL)[0],
             @encode(NSUInteger)[0],
             @encode(NSManagedObject *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -232,6 +237,7 @@
             @encode(SEL)[0],
             @encode(NSIndexSet *)[0],
             @encode(NSArray *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -254,6 +260,7 @@
             @encode(NSManagedObject *)[0],
             @encode(SEL)[0],
             @encode(NSManagedObject *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -280,6 +287,7 @@
             @encode(NSManagedObject *)[0],
             @encode(SEL)[0],
             @encode(NSManagedObject *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -315,6 +323,7 @@
             @encode(NSManagedObject *)[0],
             @encode(SEL)[0],
             @encode(NSOrderedSet *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
@@ -346,6 +355,7 @@
             @encode(NSManagedObject *)[0],
             @encode(SEL)[0],
             @encode(NSOrderedSet *)[0],
+			'\0'
         };
         class_replaceMethod(entityClass, sel, imp, encoding);
     }
