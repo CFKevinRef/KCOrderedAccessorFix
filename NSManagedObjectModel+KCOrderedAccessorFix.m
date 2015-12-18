@@ -37,7 +37,7 @@
 
 @implementation NSManagedObjectModel (KCOrderedAccessorFix)
 
- - (void)kc_generateOrderedSetAccessors
+- (void)kc_generateOrderedSetAccessors
 {
     for (NSEntityDescription *entity in self) {
         [self kc_generateOrderedSetAccessorsForEntity:entity];
@@ -62,7 +62,7 @@
     
     NSString *capitalizedName = [relationshipName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[relationshipName substringToIndex:1] uppercaseString]];
     
-    const char *fastPrimitiveName = [[[NSString alloc] initWithFormat:@"primitive%@", capitalizedName] UTF8String];
+    const char *fastPrimitiveName = [[@"primitive" stringByAppendingString:capitalizedName] UTF8String];
     
     objc_property_t fastPrimitiveProp = class_getProperty(entityClass, fastPrimitiveName);
     if (fastPrimitiveProp == NULL)
@@ -105,13 +105,13 @@
     
     //- (void)insertObject:(NSManagedObject *)value in<#Key#>AtIndex:(NSUInteger)idx;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"insertObject:in%@AtIndex:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"insertObject:in%@AtIndex:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSManagedObject *value, NSUInteger idx) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:idx];
             [_s willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexSet forKey:relationshipName];
             [primitive insertObject:value atIndex:idx];
             [_s didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexSet forKey:relationshipName];
@@ -129,13 +129,13 @@
     
     //- (void)removeObjectFrom<#Key#>AtIndex:(NSUInteger)idx;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"removeObjectFrom%@AtIndex:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"removeObjectFrom%@AtIndex:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSUInteger idx) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:idx];
             [_s willChange:NSKeyValueChangeRemoval valuesAtIndexes:indexSet forKey:relationshipName];
             [primitive removeObjectAtIndex:idx];
             [_s didChange:NSKeyValueChangeRemoval valuesAtIndexes:indexSet forKey:relationshipName];
@@ -152,7 +152,7 @@
     
     //- (void)insert<#Key#>:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"insert%@:atIndexes:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"insert%@:atIndexes:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSArray *objects, NSIndexSet *indexes) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
@@ -175,7 +175,7 @@
     
     //- (void)remove<#Key#>AtIndexes:(NSIndexSet *)indexes;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"remove%@AtIndexes:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"remove%@AtIndexes:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSIndexSet *indexes) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
@@ -197,13 +197,13 @@
     
     //- (void)replaceObjectIn<#Key#>AtIndex:(NSUInteger)idx withObject:(NSManagedObject *)value;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"replaceObjectIn%@AtIndex:withObject:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"replaceObjectIn%@AtIndex:withObject:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSUInteger idx, NSManagedObject *obj) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:idx];
             [_s willChange:NSKeyValueChangeReplacement valuesAtIndexes:indexSet forKey:relationshipName];
             [primitive replaceObjectAtIndex:idx withObject:obj];
             [_s didChange:NSKeyValueChangeReplacement valuesAtIndexes:indexSet forKey:relationshipName];
@@ -221,7 +221,7 @@
     
     //- (void)replace<#Key#>AtIndexes:(NSIndexSet *)indexes with<#Key#>:(NSArray *)values;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"replace%@AtIndexes:with%@:", capitalizedName, capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"replace%@AtIndexes:with%@:", capitalizedName, capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSIndexSet *indexes, NSArray *objects) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
@@ -244,13 +244,13 @@
     
     //- (void)add<#Key#>Object:(NSManagedObject *)value;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"add%@Object:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"add%@Object:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSManagedObject *obj) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
             [_s didAccessValueForKey:relationshipName];
             
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:[primitive count]];
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[primitive count]];
             [_s willChange:NSKeyValueChangeInsertion valuesAtIndexes:indexSet forKey:relationshipName];
             [primitive addObject:obj];
             [_s didChange:NSKeyValueChangeInsertion valuesAtIndexes:indexSet forKey:relationshipName];
@@ -267,7 +267,7 @@
     
     //- (void)remove<#Key#>Object:(NSManagedObject *)value;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"remove%@Object:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"remove%@Object:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSManagedObject *obj) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
@@ -277,7 +277,7 @@
             if (idx == NSNotFound)
                 return;
             
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:idx];
+            NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:idx];
             [_s willChange:NSKeyValueChangeRemoval valuesAtIndexes:indexSet forKey:relationshipName];
             [primitive removeObjectAtIndex:idx];
             [_s didChange:NSKeyValueChangeRemoval valuesAtIndexes:indexSet forKey:relationshipName];
@@ -294,7 +294,7 @@
     
     //- (void)add<#Key#>:(NSOrderedSet *)values;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"add%@:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"add%@:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSOrderedSet *objects) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
@@ -313,7 +313,7 @@
                 .length = newObjectCount,
             };
             
-            NSIndexSet *insertionIndexes = [[NSIndexSet alloc] initWithIndexesInRange:insertionRange];
+            NSIndexSet *insertionIndexes = [NSIndexSet indexSetWithIndexesInRange:insertionRange];
             [_s willChange:NSKeyValueChangeInsertion valuesAtIndexes:insertionIndexes forKey:relationshipName];
             [primitive addObjectsFromArray:newObjects];
             [_s didChange:NSKeyValueChangeInsertion valuesAtIndexes:insertionIndexes forKey:relationshipName];
@@ -330,7 +330,7 @@
     
     //- (void)remove<#Key#>:(NSOrderedSet *)values;
     {
-        SEL sel = sel_registerName([[[NSString alloc] initWithFormat:@"remove%@:", capitalizedName] UTF8String]);
+        SEL sel = sel_registerName([[NSString stringWithFormat:@"remove%@:", capitalizedName] UTF8String]);
         IMP imp = imp_implementationWithBlock(^(NSManagedObject *_s, NSOrderedSet *objects) {
             [_s willAccessValueForKey:relationshipName];
             NSMutableOrderedSet *primitive = action(_s, fastPrimitiveGetter);
